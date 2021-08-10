@@ -2,6 +2,10 @@ package eu.deltasource.internship.gofighters.fighters;
 
 import eu.deltasource.internship.gofighters.FighterState;
 
+/**
+ * Implementation of Fighter. Special property is:
+ * When attacking, has a 30% chance to do 300% damage.
+ */
 public class Monk extends Fighter{
 
     protected final static double CHANCE_TO_BLOCK = 0.3;

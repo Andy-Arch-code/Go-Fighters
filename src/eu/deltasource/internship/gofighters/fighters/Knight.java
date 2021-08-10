@@ -2,6 +2,11 @@ package eu.deltasource.internship.gofighters.fighters;
 
 import eu.deltasource.internship.gofighters.FighterState;
 
+/**
+ * Implementation of Fighter. Special properties are:
+ * When defending, has a 20% chance to completely block the attack and receive no damage.
+ * When attacking, has a 10% chance to do 200% damage.
+ */
 public class Knight extends Fighter{
 
     protected final static double CHANCE_TO_BLOCK = 0.2;
