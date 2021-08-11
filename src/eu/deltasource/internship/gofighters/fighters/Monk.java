@@ -23,13 +23,11 @@ public class Monk extends Fighter{
      */
     @Override
     public void takeDamage(int damage) {
-        int damageTaken = (int)(damage - armorPoints * eu.deltasource.internship.gofighters.Math.
-                getRandomNumberInRange(MIN_DEFEND_MOD, MAX_DEFEND_MOD));
-        double randomNumber = eu.deltasource.internship.gofighters.Math.
-                getRandomNumberInRange(0, 1);
+        int damageTaken = eu.deltasource.internship.gofighters.UtilityFunctions.roundToInt(
+                damage - armorPoints * eu.deltasource.internship.gofighters.UtilityFunctions.
+                        getRandomNumberInRange(MIN_DEFEND_MOD, MAX_DEFEND_MOD));
 
-
-        if (damageTaken < 0 || CHANCE_TO_BLOCK >= randomNumber){
+        if (damageTaken < 0 || eu.deltasource.internship.gofighters.UtilityFunctions.calculateChance(CHANCE_TO_BLOCK)){
             damageTaken = 0;
         }
 

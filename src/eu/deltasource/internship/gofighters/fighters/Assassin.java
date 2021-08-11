@@ -22,13 +22,11 @@ public class Assassin extends Fighter{
      */
     @Override
     public int attack() {
-        int attackDamage = (int)(attackPoints * eu.deltasource.internship.gofighters.Math.
+        int attackDamage = eu.deltasource.internship.gofighters.UtilityFunctions.roundToInt(
+                attackPoints * eu.deltasource.internship.gofighters.UtilityFunctions.
                 getRandomNumberInRange(MIN_ATTACK_MOD, MAX_ATTACK_MOD));
 
-        double randomNumber = eu.deltasource.internship.gofighters.Math.
-                getRandomNumberInRange(0, 1);
-
-        if (CHANCE_TO_DO_CRIT >= randomNumber) {
+        if (eu.deltasource.internship.gofighters.UtilityFunctions.calculateChance(CHANCE_TO_DO_CRIT)) {
             attackDamage *= CRIT_MULT;
         }
 

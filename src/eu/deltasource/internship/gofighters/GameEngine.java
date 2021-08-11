@@ -12,8 +12,8 @@ public class GameEngine {
     private boolean isRunning = true;
 
     //These integers determine which fighter attacks and which defends.
-    private int fighterCounter1 = 0; //The fighter with this variable is always defending.
-    private int fighterCounter2 = 1; //The fighter with this variable is always attacking.
+    private int defenderIndex  = 0; //The fighter with this variable is always defending.
+    private int attackerIndex = 1; //The fighter with this variable is always attacking.
 
 
     /**
@@ -27,29 +27,29 @@ public class GameEngine {
 
         isRunning = true;
         fighters = new Fighter[]{fighter1, fighter2};
-        Fighter result = null;
+        Fighter winner = null;
 
         while(isRunning){
             //There are two fighters in the array. One takes the damage and the other attacks.
-            fighters[fighterCounter1].takeDamage(fighters[fighterCounter2].attack());
+            fighters[defenderIndex ].takeDamage(fighters[attackerIndex].attack());
 
             //The surviving fighter will always be the attacking one.
-            if (fighters[fighterCounter1].isDead()){
-                result = fighters[fighterCounter2];
+            if (fighters[defenderIndex ].isDead()){
+                winner = fighters[attackerIndex];
                 isRunning = false;
             }
             //the variables switch values after every attack. This way fighters always switch as well.
-            switchValues();
+            switchFighterRoles();
         }
-        return result;
+        return winner;
     }
 
     /**
      * Switches the values that determine which fighter attacks.
      */
-    private void switchValues(){
-        int temp = fighterCounter1;
-        fighterCounter1 = fighterCounter2;
-        fighterCounter2 = temp;
+    private void switchFighterRoles(){
+        int temp = defenderIndex;
+        defenderIndex = attackerIndex;
+        attackerIndex = temp;
     }
 }

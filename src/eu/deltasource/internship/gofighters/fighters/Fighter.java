@@ -1,5 +1,7 @@
 package eu.deltasource.internship.gofighters.fighters;
 
+import java.lang.Double;
+
 /**
  * To be extended by other classes. This class contains only the bare minimum features.
  * To augment how the Fighter acts, the attack and takeDamage methods need to be overridden.
@@ -36,8 +38,9 @@ public abstract class Fighter {
      * @return The attack damage.
      */
     public int attack() {
-        int attackDamage = (int)(attackPoints * eu.deltasource.internship.gofighters.Math.
-                                                getRandomNumberInRange(MIN_ATTACK_MOD, MAX_ATTACK_MOD));
+        int attackDamage = eu.deltasource.internship.gofighters.UtilityFunctions.roundToInt(
+                attackPoints * eu.deltasource.internship.gofighters.UtilityFunctions.
+                        getRandomNumberInRange(MIN_ATTACK_MOD, MAX_ATTACK_MOD));
         return attackDamage;
     }
 
@@ -48,8 +51,9 @@ public abstract class Fighter {
      * @return The state of the fighter. Can be either ALIVE or DEAD.
      */
     public void takeDamage(int damage) {
-        int damageTaken = (int)(damage - armorPoints * eu.deltasource.internship.gofighters.Math.
-                                                       getRandomNumberInRange(MIN_DEFEND_MOD, MAX_DEFEND_MOD));
+        int damageTaken = eu.deltasource.internship.gofighters.UtilityFunctions.roundToInt(
+                damage - armorPoints * eu.deltasource.internship.gofighters.UtilityFunctions.
+                        getRandomNumberInRange(MIN_DEFEND_MOD, MAX_DEFEND_MOD));
         if (damageTaken < 0){
             damageTaken = 0;
         }

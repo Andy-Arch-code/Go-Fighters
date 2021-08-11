@@ -5,7 +5,7 @@ package eu.deltasource.internship.gofighters.fighters;
  */
 public class Warrior extends Fighter{
 
-    public Warrior(String name,int health, int attackPoints, int armorPoints){
+    public Warrior(String name, int health, int attackPoints, int armorPoints){
         super(name, health, attackPoints, armorPoints);
     }
 }
