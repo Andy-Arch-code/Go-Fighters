@@ -1,7 +1,5 @@
 package eu.deltasource.internship.gofighters.fighters;
 
-import eu.deltasource.internship.gofighters.FighterState;
-
 /**
  * To be extended by other classes. This class contains only the bare minimum features.
  * To augment how the Fighter acts, the attack and takeDamage methods need to be overridden.
@@ -15,7 +13,6 @@ public abstract class Fighter {
     protected final static double MAX_DEFEND_MOD = 1.2;
 
     protected String name;
-    protected FighterState fighterState = FighterState.ALIVE;
 
     protected int health;
     protected int attackPoints;
@@ -50,7 +47,7 @@ public abstract class Fighter {
      * @param damage The raw amount of damage that the fighter takes
      * @return The state of the fighter. Can be either ALIVE or DEAD.
      */
-    public FighterState takeDamage(int damage) {
+    public void takeDamage(int damage) {
         int damageTaken = (int)(damage - armorPoints * eu.deltasource.internship.gofighters.Math.
                                                        getRandomNumberInRange(MIN_DEFEND_MOD, MAX_DEFEND_MOD));
         if (damageTaken < 0){
@@ -58,12 +55,13 @@ public abstract class Fighter {
         }
 
         health -= damageTaken;
+    }
 
-        if (health <= 0) {
-            fighterState = FighterState.DEAD;
-            return FighterState.DEAD;
+    public boolean isDead() {
+        if (health <= 0){
+            return true;
         }
-        return FighterState.ALIVE;
+        return false;
     }
 
     /**

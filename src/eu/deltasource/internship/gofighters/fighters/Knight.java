@@ -1,7 +1,5 @@
 package eu.deltasource.internship.gofighters.fighters;
 
-import eu.deltasource.internship.gofighters.FighterState;
-
 /**
  * Implementation of Fighter. Special properties are:
  * When defending, has a 20% chance to completely block the attack and receive no damage.
@@ -46,7 +44,8 @@ public class Knight extends Fighter{
      * @param damage The raw amount of damage that the fighter takes
      * @return The state of the fighter. Can be either ALIVE or DEAD.
      */
-    public FighterState takeDamage(int damage) {
+    @Override
+    public void takeDamage(int damage) {
         int damageTaken = (int)(damage - armorPoints * eu.deltasource.internship.gofighters.Math.
                                                         getRandomNumberInRange(MIN_DEFEND_MOD, MAX_DEFEND_MOD));
         double randomNumber = eu.deltasource.internship.gofighters.Math.
@@ -58,11 +57,5 @@ public class Knight extends Fighter{
         }
 
         health -= damageTaken;
-
-        if (health <= 0) {
-            fighterState = FighterState.DEAD;
-            return FighterState.DEAD;
-        }
-        return FighterState.ALIVE;
     }
 }

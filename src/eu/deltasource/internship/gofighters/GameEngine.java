@@ -15,35 +15,32 @@ public class GameEngine {
     private int fighterCounter1 = 0; //The fighter with this variable is always defending.
     private int fighterCounter2 = 1; //The fighter with this variable is always attacking.
 
-    /**
-     * Configures the fighters into the GameEngine.
-     * @param fighter1 The first fighter in the fight.
-     * @param fighter2 The second fighter in the fight.
-     */
-    public GameEngine(Fighter fighter1, Fighter fighter2){
-
-        fighters = new Fighter[]{fighter1, fighter2};
-    }
 
     /**
-     * Runs the fighting logic in the game until a fighter dies, which at that point returns the fighter that won.
+     * Sets up fighters and runs the fighting logic in the game until a fighter dies,
+     * which at that point returns the fighter that won.
      * @return The fighter that won.
+     * @param fighter1 The first fighter.
+     * @param fighter2 The second fighter.
      */
-    public Fighter run(){
+    public Fighter run(Fighter fighter1, Fighter fighter2){
 
+        isRunning = true;
+        fighters = new Fighter[]{fighter1, fighter2};
         Fighter result = null;
 
         while(isRunning){
             //There are two fighters in the array. One takes the damage and the other attacks.
-            if (fighters[fighterCounter1].takeDamage(fighters[fighterCounter2].attack()) == FighterState.DEAD){
-                //The surviving fighter will always be the attacking one.
+            fighters[fighterCounter1].takeDamage(fighters[fighterCounter2].attack());
+
+            //The surviving fighter will always be the attacking one.
+            if (fighters[fighterCounter1].isDead()){
                 result = fighters[fighterCounter2];
                 isRunning = false;
             }
             //the variables switch values after every attack. This way fighters always switch as well.
             switchValues();
         }
-
         return result;
     }
 

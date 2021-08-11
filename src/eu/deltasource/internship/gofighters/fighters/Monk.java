@@ -1,7 +1,5 @@
 package eu.deltasource.internship.gofighters.fighters;
 
-import eu.deltasource.internship.gofighters.FighterState;
-
 /**
  * Implementation of Fighter. Special property is:
  * When attacking, has a 30% chance to do 300% damage.
@@ -16,17 +14,6 @@ public class Monk extends Fighter{
     }
 
     /**
-     * Calculates the damage of the attack by multiplying the attackPoints with a random value between a range.
-     * @return The attack damage.
-     */
-    public int attack() {
-        int attackDamage = (int)(attackPoints * eu.deltasource.internship.gofighters.Math.
-                getRandomNumberInRange(MIN_ATTACK_MOD, MAX_ATTACK_MOD));
-
-        return attackDamage;
-    }
-
-    /**
      * Calculates the damage that the fighter will take by multiplying the armorPoints with a random value
      * between a range and checks if the fighter is dead.
      * Additionally, takes into account the specific properties of a Monk:
@@ -34,7 +21,8 @@ public class Monk extends Fighter{
      * @param damage The raw amount of damage that the fighter takes
      * @return The state of the fighter. Can be either ALIVE or DEAD.
      */
-    public FighterState takeDamage(int damage) {
+    @Override
+    public void takeDamage(int damage) {
         int damageTaken = (int)(damage - armorPoints * eu.deltasource.internship.gofighters.Math.
                 getRandomNumberInRange(MIN_DEFEND_MOD, MAX_DEFEND_MOD));
         double randomNumber = eu.deltasource.internship.gofighters.Math.
@@ -46,11 +34,5 @@ public class Monk extends Fighter{
         }
 
         health -= damageTaken;
-
-        if (health <= 0) {
-            fighterState = FighterState.DEAD;
-            return FighterState.DEAD;
-        }
-        return FighterState.ALIVE;
     }
 }
