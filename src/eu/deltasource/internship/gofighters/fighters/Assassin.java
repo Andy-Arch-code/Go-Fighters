@@ -1,5 +1,7 @@
 package eu.deltasource.internship.gofighters.fighters;
 
+import eu.deltasource.internship.gofighters.RngCalculations;
+
 public class Assassin extends Fighter{
 
     protected final static double CHANCE_TO_DO_CRIT = 0.3;
@@ -9,8 +11,12 @@ public class Assassin extends Fighter{
      * Implementation of Fighter. Special property is:
      * When attacking, has a 30% chance to do 300% damage.
      */
-    public Assassin(String name, int health, int attackPoints, int armorPoints){
-        super(name, health, attackPoints, armorPoints);
+    public Assassin(String name, int health, int attackPoints, int armorPoints, RngCalculations rngCalculations){
+        super(name, health, attackPoints, armorPoints, rngCalculations);
+    }
+
+    public static double getCritMult() {
+        return CRIT_MULT;
     }
 
     /**
@@ -22,12 +28,11 @@ public class Assassin extends Fighter{
      */
     @Override
     public int attack() {
-        int attackDamage = eu.deltasource.internship.gofighters.UtilityFunctions.roundToInt(
-                attackPoints * eu.deltasource.internship.gofighters.UtilityFunctions.
-                getRandomNumberInRange(MIN_ATTACK_MOD, MAX_ATTACK_MOD));
+        int attackDamage = rngCalculations.roundToInt(getAttackPoints() * rngCalculations.
+                getRandomNumberInRange(getMinAttackMod(), getMaxAttackMod()));
 
-        if (eu.deltasource.internship.gofighters.UtilityFunctions.calculateChance(CHANCE_TO_DO_CRIT)) {
-            attackDamage *= CRIT_MULT;
+        if (rngCalculations.calculateChance(CHANCE_TO_DO_CRIT)) {
+            attackDamage *= getCritMult();
         }
 
         return attackDamage;

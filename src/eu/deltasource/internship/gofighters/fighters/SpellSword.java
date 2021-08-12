@@ -1,5 +1,7 @@
 package eu.deltasource.internship.gofighters.fighters;
 
+import eu.deltasource.internship.gofighters.RngCalculations;
+
 /**
  * Implementation of Fighter. Special properties are:
  * When defending, has a 15% chance to completely block the attack and receive no damage.
@@ -12,8 +14,12 @@ public class SpellSword extends Fighter{
     protected final static double CRIT_MULT = 2;
 
 
-    public SpellSword(String name,int health, int attackPoints, int armorPoints){
-        super(name, health, attackPoints, armorPoints);
+    public SpellSword(String name, int health, int attackPoints, int armorPoints, RngCalculations rngCalculations){
+        super(name, health, attackPoints, armorPoints, rngCalculations);
+    }
+
+    public static double getCritMult() {
+        return CRIT_MULT;
     }
 
     /**
@@ -25,12 +31,11 @@ public class SpellSword extends Fighter{
      */
     @Override
     public int attack() {
-        int attackDamage = eu.deltasource.internship.gofighters.UtilityFunctions.roundToInt(
-                attackPoints * eu.deltasource.internship.gofighters.UtilityFunctions.
-                        getRandomNumberInRange(MIN_ATTACK_MOD, MAX_ATTACK_MOD));
+        int attackDamage = rngCalculations.roundToInt(getAttackPoints() * rngCalculations.
+                        getRandomNumberInRange(getMinAttackMod(), getMaxAttackMod()));
 
-        if (eu.deltasource.internship.gofighters.UtilityFunctions.calculateChance(CHANCE_TO_DO_CRIT)) {
-            attackDamage *= CRIT_MULT;
+        if (rngCalculations.calculateChance(CHANCE_TO_DO_CRIT)) {
+            attackDamage *= getCritMult();
         }
 
         return attackDamage;
@@ -41,19 +46,20 @@ public class SpellSword extends Fighter{
      * between a range and checks if the fighter is dead.
      * Additionally, takes into account the specific properties of a SpellSword:
      * - When defending, has a 15% chance to completely block the attack and receive no damage.
+     *
      * @param damage The raw amount of damage that the fighter takes
+     *
      * @return The state of the fighter. Can be either ALIVE or DEAD.
      */
     @Override
     public void takeDamage(int damage) {
-        int damageTaken = eu.deltasource.internship.gofighters.UtilityFunctions.roundToInt(
-                damage - armorPoints * eu.deltasource.internship.gofighters.UtilityFunctions.
-                        getRandomNumberInRange(MIN_DEFEND_MOD, MAX_DEFEND_MOD));
+        int damageTaken = rngCalculations.roundToInt(damage - getArmorPoints() * rngCalculations.
+                        getRandomNumberInRange(getMinDefendMod(), getMaxDefendMod()));
 
-        if (damageTaken < 0 || eu.deltasource.internship.gofighters.UtilityFunctions.calculateChance(CHANCE_TO_BLOCK)){
+        if (damageTaken < 0 || rngCalculations.calculateChance(CHANCE_TO_BLOCK)){
             damageTaken = 0;
         }
 
-        health -= damageTaken;
+        health = getHealth() - damageTaken;
     }
 }

@@ -1,5 +1,8 @@
 package eu.deltasource.internship.gofighters.fighters;
 
+import eu.deltasource.internship.gofighters.RngCalculations;
+import eu.deltasource.internship.gofighters.RngCalculationsRealImpl;
+
 /**
  * Implementation of Fighter. Special property is:
  * When attacking, has a 30% chance to do 300% damage.
@@ -9,8 +12,8 @@ public class Monk extends Fighter{
     protected final static double CHANCE_TO_BLOCK = 0.3;
 
 
-    public Monk(String name,int health, int attackPoints, int armorPoints){
-        super(name, health, attackPoints, armorPoints);
+    public Monk(String name, int health, int attackPoints, int armorPoints, RngCalculations rngCalculations){
+        super(name, health, attackPoints, armorPoints, rngCalculations);
     }
 
     /**
@@ -18,19 +21,20 @@ public class Monk extends Fighter{
      * between a range and checks if the fighter is dead.
      * Additionally, takes into account the specific properties of a Monk:
      * - When defending, has a 30% chance to completely block the attack and receive no damage.
+     *
      * @param damage The raw amount of damage that the fighter takes
+     *
      * @return The state of the fighter. Can be either ALIVE or DEAD.
      */
     @Override
     public void takeDamage(int damage) {
-        int damageTaken = eu.deltasource.internship.gofighters.UtilityFunctions.roundToInt(
-                damage - armorPoints * eu.deltasource.internship.gofighters.UtilityFunctions.
-                        getRandomNumberInRange(MIN_DEFEND_MOD, MAX_DEFEND_MOD));
+        int damageTaken = rngCalculations.roundToInt(damage - getArmorPoints() * rngCalculations.
+                                                        getRandomNumberInRange(getMinDefendMod(), getMaxDefendMod()));
 
-        if (damageTaken < 0 || eu.deltasource.internship.gofighters.UtilityFunctions.calculateChance(CHANCE_TO_BLOCK)){
+        if (damageTaken < 0 || rngCalculations.calculateChance(CHANCE_TO_BLOCK)){
             damageTaken = 0;
         }
 
-        health -= damageTaken;
+        health = getHealth() - damageTaken;
     }
 }

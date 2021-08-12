@@ -19,7 +19,9 @@ public class GameEngine {
     /**
      * Sets up fighters and runs the fighting logic in the game until a fighter dies,
      * which at that point returns the fighter that won.
+     *
      * @return The fighter that won.
+     *
      * @param fighter1 The first fighter.
      * @param fighter2 The second fighter.
      */
@@ -31,10 +33,9 @@ public class GameEngine {
 
         while(isRunning){
             //There are two fighters in the array. One takes the damage and the other attacks.
-            fighters[defenderIndex ].takeDamage(fighters[attackerIndex].attack());
+            fighters[defenderIndex].takeDamage(fighters[attackerIndex].attack());
 
-            //The surviving fighter will always be the attacking one.
-            if (fighters[defenderIndex ].isDead()){
+            if (fighters[defenderIndex].isDead()){
                 winner = fighters[attackerIndex];
                 isRunning = false;
             }

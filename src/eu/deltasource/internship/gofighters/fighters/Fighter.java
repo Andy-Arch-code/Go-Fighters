@@ -1,6 +1,6 @@
 package eu.deltasource.internship.gofighters.fighters;
 
-import java.lang.Double;
+import eu.deltasource.internship.gofighters.RngCalculations;
 
 /**
  * To be extended by other classes. This class contains only the bare minimum features.
@@ -20,49 +20,51 @@ public abstract class Fighter {
     protected int attackPoints;
     protected int armorPoints;
 
+    protected RngCalculations rngCalculations;
+
     /**
      * @param name The name of the fighter.
      * @param health The health of the fighter.
      * @param attackPoints The attack points of the fighter.
      * @param armorPoints The armor points of the fighter.
      */
-    public Fighter(String name, int health, int attackPoints, int armorPoints) {
+    public Fighter(String name, int health, int attackPoints, int armorPoints, RngCalculations rngCalculations) {
         this.name = name;
         this.health = health;
         this.attackPoints = attackPoints;
         this.armorPoints = armorPoints;
+        this.rngCalculations = rngCalculations;
     }
 
     /**
      * Calculates the damage of the attack by multiplying the attackPoints with a random value between a range.
+     *
      * @return The attack damage.
      */
     public int attack() {
-        int attackDamage = eu.deltasource.internship.gofighters.UtilityFunctions.roundToInt(
-                attackPoints * eu.deltasource.internship.gofighters.UtilityFunctions.
-                        getRandomNumberInRange(MIN_ATTACK_MOD, MAX_ATTACK_MOD));
+        int attackDamage = rngCalculations.roundToInt(getAttackPoints() * rngCalculations.
+                        getRandomNumberInRange(getMinAttackMod(), getMaxAttackMod()));
         return attackDamage;
     }
 
     /**
      * Calculates the damage that the fighter will take by multiplying the armorPoints with a random value
      * between a range and checks if the fighter is dead.
+     *
      * @param damage The raw amount of damage that the fighter takes
-     * @return The state of the fighter. Can be either ALIVE or DEAD.
      */
     public void takeDamage(int damage) {
-        int damageTaken = eu.deltasource.internship.gofighters.UtilityFunctions.roundToInt(
-                damage - armorPoints * eu.deltasource.internship.gofighters.UtilityFunctions.
-                        getRandomNumberInRange(MIN_DEFEND_MOD, MAX_DEFEND_MOD));
+        int damageTaken = rngCalculations.roundToInt(damage - getArmorPoints() * rngCalculations.
+                        getRandomNumberInRange(getMinDefendMod(), getMaxDefendMod()));
         if (damageTaken < 0){
             damageTaken = 0;
         }
 
-        health -= damageTaken;
+        health = getHealth() - damageTaken;
     }
 
     public boolean isDead() {
-        if (health <= 0){
+        if (getHealth() <= 0){
             return true;
         }
         return false;
@@ -73,5 +75,33 @@ public abstract class Fighter {
      */
     public String getName() {
         return name;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public int getAttackPoints() {
+        return attackPoints;
+    }
+
+    public int getArmorPoints() {
+        return armorPoints;
+    }
+
+    public static double getMinAttackMod() {
+        return MIN_ATTACK_MOD;
+    }
+
+    public static double getMaxAttackMod() {
+        return MAX_ATTACK_MOD;
+    }
+
+    public static double getMinDefendMod() {
+        return MIN_DEFEND_MOD;
+    }
+
+    public static double getMaxDefendMod() {
+        return MAX_DEFEND_MOD;
     }
 }
