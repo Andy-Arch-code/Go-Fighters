@@ -2,6 +2,7 @@ package eu.deltasource.internship.gofighters.fighters;
 
 import eu.deltasource.internship.gofighters.RngCalculations;
 import eu.deltasource.internship.gofighters.RngCalculationsRealImpl;
+import eu.deltasource.internship.gofighters.dependencyinjector.DependencyInjector;
 
 /**
  * Implementation of Fighter. Special property is:
@@ -12,8 +13,8 @@ public class Monk extends Fighter{
     protected final static double CHANCE_TO_BLOCK = 0.3;
 
 
-    public Monk(String name, int health, int attackPoints, int armorPoints, RngCalculations rngCalculations){
-        super(name, health, attackPoints, armorPoints, rngCalculations);
+    public Monk(String name, int health, int attackPoints, int armorPoints, DependencyInjector dependencyInjector){
+        super(name, health, attackPoints, armorPoints, dependencyInjector);
     }
 
     /**

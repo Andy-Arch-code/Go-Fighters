@@ -1,6 +1,7 @@
 package eu.deltasource.internship.gofighters.fighters;
 
 import eu.deltasource.internship.gofighters.RngCalculations;
+import eu.deltasource.internship.gofighters.dependencyinjector.DependencyInjector;
 
 /**
  * Implementation of Fighter. Special properties are:
@@ -14,8 +15,8 @@ public class Knight extends Fighter{
     protected final static double CRIT_MULT = 2;
 
 
-    public Knight(String name, int health, int attackPoints, int armorPoints, RngCalculations rngCalculations){
-        super(name, health, attackPoints, armorPoints, rngCalculations);
+    public Knight(String name, int health, int attackPoints, int armorPoints, DependencyInjector dependencyInjector){
+        super(name, health, attackPoints, armorPoints, dependencyInjector);
     }
 
     public static double getCritMult() {

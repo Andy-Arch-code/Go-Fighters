@@ -3,7 +3,7 @@ package eu.deltasource.internship.gofighters;
 /**
  * A class containing methods used in calculations
  */
-public class RngCalculationsRealImpl implements RngCalculations{
+public class RngCalculationsRealImpl implements RngCalculations {
 
     /**
      * @param min The minimum limit.
