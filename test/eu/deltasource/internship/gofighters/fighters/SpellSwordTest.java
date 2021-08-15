@@ -9,11 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SpellSwordTest {
 
-    DependencyInjector dependencyInjector = new DependencyInjector(new RngCalculationsTestingImpl());
-
     @Test
     void attack() {
-        Fighter gosho = new SpellSword("gosho", 100, 10, 5, dependencyInjector);
+        DependencyInjector.init(new RngCalculationsTestingImpl());
+
+        Fighter gosho = new SpellSword("gosho", 100, 10, 5,
+                DependencyInjector.load(RngCalculationsTestingImpl.class));
 
         RngCalculations rngCalculator = new RngCalculationsTestingImpl();
         int expectedAnswer = rngCalculator.roundToInt(
@@ -24,7 +25,10 @@ class SpellSwordTest {
 
     @Test
     void takeDamage() {
-        Fighter gosho = new SpellSword("gosho", 100, 10, 5, dependencyInjector);
+        DependencyInjector.init(new RngCalculationsTestingImpl());
+
+        Fighter gosho = new SpellSword("gosho", 100, 10, 5,
+                DependencyInjector.load(RngCalculationsTestingImpl.class));
         int damage = 10;
 
         RngCalculations rngCalculator = new RngCalculationsTestingImpl();

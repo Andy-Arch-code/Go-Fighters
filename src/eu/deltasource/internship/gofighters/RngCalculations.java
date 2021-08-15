@@ -1,9 +1,11 @@
 package eu.deltasource.internship.gofighters;
 
+import eu.deltasource.internship.gofighters.dependencyinjector.Dependency;
+
 /**
  * A class containing methods used in calculations
  */
-public interface RngCalculations {
+public interface RngCalculations extends Dependency {
     /**
      * @param min The minimum limit.
      * @param max The maximum limit.

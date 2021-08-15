@@ -7,20 +7,23 @@ import eu.deltasource.internship.gofighters.RngCalculations;
  */
 public class DependencyInjector {
 
-    private RngCalculations rngCalculations;
+    private static Dependency[] dependenciesContainer;
 
-    /**
-     * The constructor accepts implementations of the dependencies.
-     * @param rngCalculations The RngCalculations utility dependency.
-     */
-    public DependencyInjector(RngCalculations rngCalculations){
-        this.rngCalculations = rngCalculations;
+    public static void init(Dependency... dependencies){
+
+        dependenciesContainer = new Dependency[dependencies.length];
+        for (int i = 0; i < dependencies.length; i++) {
+            dependenciesContainer[i] = dependencies[i];
+        }
     }
 
-    /**
-     * @return The RngCalculations utility dependency.
-     */
-    public RngCalculations getRngCalculations() {
-        return rngCalculations;
+    public static <T extends Dependency> T load(Class<T> dependencyType){
+
+        for (int i = 0; i < dependenciesContainer.length; i++) {
+            if(dependenciesContainer[i].getClass() == dependencyType){
+                return (T) dependenciesContainer[i];
+            }
+        }
+        return null;
     }
 }

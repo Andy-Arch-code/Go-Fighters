@@ -15,8 +15,8 @@ public class Knight extends Fighter{
     protected final static double CRIT_MULT = 2;
 
 
-    public Knight(String name, int health, int attackPoints, int armorPoints, DependencyInjector dependencyInjector){
-        super(name, health, attackPoints, armorPoints, dependencyInjector);
+    public Knight(String name, int health, int attackPoints, int armorPoints, RngCalculations rngCalculations){
+        super(name, health, attackPoints, armorPoints, rngCalculations);
     }
 
     public static double getCritMult() {

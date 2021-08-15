@@ -9,10 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AssassinTest {
 
-    DependencyInjector dependencyInjector = new DependencyInjector(new RngCalculationsTestingImpl());
     @Test
     void attack() {
-        Fighter gosho = new Assassin("gosho", 100, 10, 5, dependencyInjector);
+        DependencyInjector.init(new RngCalculationsTestingImpl());
+
+        Fighter gosho = new Assassin("gosho", 100, 10, 5,
+                DependencyInjector.load(RngCalculationsTestingImpl.class));
 
         RngCalculations rngCalculator = new RngCalculationsTestingImpl();
         int expectedAnswer = rngCalculator.roundToInt(

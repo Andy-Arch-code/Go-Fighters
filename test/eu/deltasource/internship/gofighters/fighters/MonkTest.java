@@ -9,11 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MonkTest {
 
-    DependencyInjector dependencyInjector = new DependencyInjector(new RngCalculationsTestingImpl());
-
     @Test
     void takeDamage() {
-        Fighter gosho = new Monk("gosho", 100, 10, 5, dependencyInjector);
+        DependencyInjector.init(new RngCalculationsTestingImpl());
+
+        Fighter gosho = new Monk("gosho", 100, 10, 5,
+                DependencyInjector.load(RngCalculationsTestingImpl.class));
         int damage = 10;
 
         RngCalculations rngCalculator = new RngCalculationsTestingImpl();

@@ -8,18 +8,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameEngineTest {
 
-    DependencyInjector dependencyInjector = new DependencyInjector(new RngCalculationsTestingImpl());
-
     @Test
     void run() {
-
         GameEngine fighterState = new GameEngine();
 
-        for (int x = 0; x < 10; x++) {
-            Fighter gosho = new Warrior("gosho", 100, 10, 5, dependencyInjector);
-            Fighter pesho = new SpellSword("pesho", 100, 10, 5, dependencyInjector);
+        DependencyInjector.init(new RngCalculationsTestingImpl());
 
-            assertEquals(fighterState.run(gosho, pesho).getName(), "pesho");
-        }
+        Fighter gosho = new Warrior("gosho", 100, 10, 5,
+                DependencyInjector.load(RngCalculationsTestingImpl.class));
+        Fighter pesho = new SpellSword("pesho", 100, 10, 5,
+                DependencyInjector.load(RngCalculationsTestingImpl.class));
+
+        assertEquals(fighterState.run(gosho, pesho).getName(), "pesho");
+
     }
 }

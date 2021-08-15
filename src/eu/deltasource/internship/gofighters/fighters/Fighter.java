@@ -29,12 +29,12 @@ public abstract class Fighter {
      * @param attackPoints The attack points of the fighter.
      * @param armorPoints The armor points of the fighter.
      */
-    public Fighter(String name, int health, int attackPoints, int armorPoints, DependencyInjector dependencyInjector) {
+    public Fighter(String name, int health, int attackPoints, int armorPoints, RngCalculations rngCalculations) {
         this.name = name;
         this.health = health;
         this.attackPoints = attackPoints;
         this.armorPoints = armorPoints;
-        this.rngCalculations = dependencyInjector.getRngCalculations();
+        this.rngCalculations = rngCalculations;
     }
 
     /**
