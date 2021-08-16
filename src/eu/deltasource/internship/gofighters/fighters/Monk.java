@@ -13,8 +13,8 @@ public class Monk extends Fighter{
     protected final static double CHANCE_TO_BLOCK = 0.3;
 
 
-    public Monk(String name, int health, int attackPoints, int armorPoints, RngCalculations rngCalculations){
-        super(name, health, attackPoints, armorPoints, rngCalculations);
+    public Monk(String name, int health, int attackPoints, int armorPoints){
+        super(name, health, attackPoints, armorPoints);
     }
 
     /**

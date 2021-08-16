@@ -1,4 +1,4 @@
 package eu.deltasource.internship.gofighters.dependencyinjector;
 
-public interface Dependency {
+public interface Dependency <T> {
 }

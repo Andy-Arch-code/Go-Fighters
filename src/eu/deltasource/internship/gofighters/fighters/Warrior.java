@@ -8,7 +8,7 @@ import eu.deltasource.internship.gofighters.dependencyinjector.DependencyInjecto
  */
 public class Warrior extends Fighter{
 
-    public Warrior(String name, int health, int attackPoints, int armorPoints, RngCalculations rngCalculations){
-        super(name, health, attackPoints, armorPoints, rngCalculations);
+    public Warrior(String name, int health, int attackPoints, int armorPoints){
+        super(name, health, attackPoints, armorPoints);
     }
 }

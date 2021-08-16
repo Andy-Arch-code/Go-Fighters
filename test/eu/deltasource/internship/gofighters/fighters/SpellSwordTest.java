@@ -7,28 +7,36 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SpellSwordTest {
+public class SpellSwordTest {
 
+    /**
+     * Given: SpellSword with normal stats.
+     * When: SpellSword attacks.
+     * Then: Calculated attack is with its bonus.
+     */
     @Test
-    void attack() {
+    public void testIfSpellSwordAttacksWithSpecialMultiplier() {
         DependencyInjector.init(new RngCalculationsTestingImpl());
 
-        Fighter gosho = new SpellSword("gosho", 100, 10, 5,
-                DependencyInjector.load(RngCalculationsTestingImpl.class));
+        Fighter gosho = new SpellSword("gosho", 100, 10, 5);
 
         RngCalculations rngCalculator = new RngCalculationsTestingImpl();
         int expectedAnswer = rngCalculator.roundToInt(
                 gosho.getAttackPoints() * gosho.getMinAttackMod() * SpellSword.getCritMult());
 
-        assertEquals(expectedAnswer, gosho.attack());
+        assertEquals(expectedAnswer, gosho.attack(), "Expected SpellSword to attack with special multiplier");
     }
 
+    /**
+     * Given: SpellSword with normal stats.
+     * When: SpellSword defends against damage.
+     * Then: SpellSword defends all damage.
+     */
     @Test
-    void takeDamage() {
+    public void testIfSpellSwordDefendsAgainstDamage() {
         DependencyInjector.init(new RngCalculationsTestingImpl());
 
-        Fighter gosho = new SpellSword("gosho", 100, 10, 5,
-                DependencyInjector.load(RngCalculationsTestingImpl.class));
+        Fighter gosho = new SpellSword("gosho", 100, 10, 5);
         int damage = 10;
 
         RngCalculations rngCalculator = new RngCalculationsTestingImpl();
@@ -36,6 +44,6 @@ class SpellSwordTest {
 
         gosho.takeDamage(damage);
 
-        assertEquals(expectedAnswer, gosho.getHealth());
+        assertEquals(expectedAnswer, gosho.getHealth(), "Expected SpellSword to defend the attack fully");
     }
 }

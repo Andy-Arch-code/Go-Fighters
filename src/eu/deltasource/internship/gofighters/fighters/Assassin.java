@@ -12,8 +12,8 @@ public class Assassin extends Fighter{
      * Implementation of Fighter. Special property is:
      * When attacking, has a 30% chance to do 300% damage.
      */
-    public Assassin(String name, int health, int attackPoints, int armorPoints, RngCalculations rngCalculations){
-        super(name, health, attackPoints, armorPoints, rngCalculations);
+    public Assassin(String name, int health, int attackPoints, int armorPoints){
+        super(name, health, attackPoints, armorPoints);
     }
 
     public static double getCritMult() {

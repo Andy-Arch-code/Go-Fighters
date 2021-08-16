@@ -7,14 +7,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MonkTest {
+public class MonkTest {
 
+    /**
+     * Given: Monk with normal stats.
+     * When: Monk defends against damage.
+     * Then: Monk defends all damage.
+     */
     @Test
-    void takeDamage() {
+    public void testIfMonkDefendsAgainstDamage() {
         DependencyInjector.init(new RngCalculationsTestingImpl());
 
-        Fighter gosho = new Monk("gosho", 100, 10, 5,
-                DependencyInjector.load(RngCalculationsTestingImpl.class));
+        Fighter gosho = new Monk("gosho", 100, 10, 5);
         int damage = 10;
 
         RngCalculations rngCalculator = new RngCalculationsTestingImpl();
@@ -22,6 +26,6 @@ class MonkTest {
 
         gosho.takeDamage(damage);
 
-        assertEquals(expectedAnswer, gosho.getHealth());
+        assertEquals(expectedAnswer, gosho.getHealth(), "Expected Monk to defend the attack fully");
     }
 }

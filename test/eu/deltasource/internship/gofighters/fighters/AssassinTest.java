@@ -7,19 +7,23 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AssassinTest {
+public class AssassinTest {
 
+    /**
+     * Given: Assassin with normal stats.
+     * When: Assassin attacks.
+     * Then: Calculated attack is with its special multiplier.
+     */
     @Test
-    void attack() {
+    public void testIfAssassinAttacksWithSpecialMultiplier() {
         DependencyInjector.init(new RngCalculationsTestingImpl());
 
-        Fighter gosho = new Assassin("gosho", 100, 10, 5,
-                DependencyInjector.load(RngCalculationsTestingImpl.class));
+        Fighter gosho = new Assassin("gosho", 100, 10, 5);
 
         RngCalculations rngCalculator = new RngCalculationsTestingImpl();
         int expectedAnswer = rngCalculator.roundToInt(
                 gosho.getAttackPoints() * gosho.getMinAttackMod() * Assassin.getCritMult());
 
-        assertEquals(expectedAnswer, gosho.attack());
+        assertEquals(expectedAnswer, gosho.attack(), "Expected Assassin to attack with special multiplier");
     }
 }

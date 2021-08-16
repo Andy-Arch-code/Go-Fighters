@@ -7,28 +7,36 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class KnightTest {
+public class KnightTest {
 
+    /**
+     * Given: Knight with normal stats.
+     * When: Knight attacks.
+     * Then: Calculated attack is with its special multiplier.
+     */
     @Test
-    void attack() {
+    public void testIfKnightAttacksWithSpecialMultiplier() {
         DependencyInjector.init(new RngCalculationsTestingImpl());
 
-        Fighter gosho = new Knight("gosho", 100, 10, 5,
-                DependencyInjector.load(RngCalculationsTestingImpl.class));
+        Fighter gosho = new Knight("gosho", 100, 10, 5);
 
         RngCalculations rngCalculator = new RngCalculationsTestingImpl();
         int expectedAnswer = rngCalculator.roundToInt(
                 gosho.getAttackPoints() * gosho.getMinAttackMod() * Knight.getCritMult());
 
-        assertEquals(expectedAnswer, gosho.attack());
+        assertEquals(expectedAnswer, gosho.attack(), "Expected Knight to attack with special multiplier");
     }
 
+    /**
+     * Given: Knight with normal stats.
+     * When: Knight defends against damage.
+     * Then: Knight defends all damage.
+     */
     @Test
-    void takeDamage() {
+    public void testIfKnightDefendsAgainstDamage() {
         DependencyInjector.init(new RngCalculationsTestingImpl());
 
-        Fighter gosho = new Knight("gosho", 100, 10, 5,
-                DependencyInjector.load(RngCalculationsTestingImpl.class));
+        Fighter gosho = new Knight("gosho", 100, 10, 5);
         int damage = 10;
 
         RngCalculations rngCalculator = new RngCalculationsTestingImpl();
@@ -36,6 +44,6 @@ class KnightTest {
 
         gosho.takeDamage(damage);
 
-        assertEquals(expectedAnswer, gosho.getHealth());
+        assertEquals(expectedAnswer, gosho.getHealth(), "Expected Knight to defend the attack fully");
     }
 }

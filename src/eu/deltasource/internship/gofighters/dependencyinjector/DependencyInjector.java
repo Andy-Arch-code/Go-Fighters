@@ -9,6 +9,10 @@ public class DependencyInjector {
 
     private static Dependency[] dependenciesContainer;
 
+    /**
+     * Loads all dependencies into the Injector.
+     * @param dependencies
+     */
     public static void init(Dependency... dependencies){
 
         dependenciesContainer = new Dependency[dependencies.length];
@@ -17,11 +21,14 @@ public class DependencyInjector {
         }
     }
 
-    public static <T extends Dependency> T load(Class<T> dependencyType){
+    /**
+     * @return The RngCalculations dependency if the dependency is stored in the Injector. If not then it returns null.
+     */
+    public static RngCalculations loadRngCalculations(){
 
         for (int i = 0; i < dependenciesContainer.length; i++) {
-            if(dependenciesContainer[i].getClass() == dependencyType){
-                return (T) dependenciesContainer[i];
+            if(dependenciesContainer[i] instanceof RngCalculations){
+                return (RngCalculations) dependenciesContainer[i];
             }
         }
         return null;
