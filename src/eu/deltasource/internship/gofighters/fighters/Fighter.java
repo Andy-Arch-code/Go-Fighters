@@ -53,8 +53,9 @@ public abstract class Fighter {
      * between a range and checks if the fighter is dead.
      *
      * @param damage The raw amount of damage that the fighter takes
+     * @return The damage taken.
      */
-    public void takeDamage(int damage) {
+    public int takeDamage(int damage) {
         int damageTaken = rngCalculations.roundToInt(damage - getArmorPoints() * rngCalculations.
                         getRandomNumberInRange(getMinDefendMod(), getMaxDefendMod()));
         if (damageTaken < 0){
@@ -62,10 +63,12 @@ public abstract class Fighter {
         }
 
         health = getHealth() - damageTaken;
+        return damageTaken;
     }
 
     public boolean isDead() {
         if (getHealth() <= 0){
+            health = 0;
             return true;
         }
         return false;

@@ -18,39 +18,35 @@ public class KnightTest {
         DependencyInjector.init(new RngCalculationsTestingImpl());
     }
 
-    /**
-     * Given: Knight with normal stats.
-     * When: Knight attacks.
-     * Then: Calculated attack is with its special multiplier.
-     */
     @Test
     public void testIfKnightAttacksWithSpecialMultiplier() {
 
+        //Given: Knight with normal stats.
         Fighter gosho = new Knight("gosho", 100, 10, 5);
 
         RngCalculations rngCalculator = new RngCalculationsTestingImpl();
-        int expectedAnswer = rngCalculator.roundToInt(
-                gosho.getAttackPoints() * gosho.getMinAttackMod() * Knight.getCritMult());
 
+        //When: Knight attacks.
+        int expectedAnswer = rngCalculator.roundToInt(
+                gosho.getAttackPoints() * Knight.getMinAttackMod() * Knight.getCritMult());
+
+        //Then: Calculated attack is with its special multiplier.
         assertEquals(expectedAnswer, gosho.attack(), "Expected Knight to attack with special multiplier");
     }
 
-    /**
-     * Given: Knight with normal stats.
-     * When: Knight defends against damage.
-     * Then: Knight defends all damage.
-     */
     @Test
     public void testIfKnightDefendsAgainstDamage() {
 
+        //Given: Knight with normal stats.
         Fighter gosho = new Knight("gosho", 100, 10, 5);
         int damage = 10;
 
-        RngCalculations rngCalculator = new RngCalculationsTestingImpl();
         int expectedAnswer = 100;
 
+        //When: Knight defends against damage.
         gosho.takeDamage(damage);
 
+        //Then: Knight defends all damage.
         assertEquals(expectedAnswer, gosho.getHealth(), "Expected Knight to defend the attack fully");
     }
 }

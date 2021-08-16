@@ -49,10 +49,10 @@ public class Knight extends Fighter{
      *
      * @param damage The raw amount of damage that the fighter takes
      *
-     * @return The state of the fighter. Can be either ALIVE or DEAD.
+     * @return The damage taken.
      */
     @Override
-    public void takeDamage(int damage) {
+    public int takeDamage(int damage) {
         int damageTaken = rngCalculations.roundToInt(damage - getArmorPoints() * rngCalculations.
                         getRandomNumberInRange(getMinDefendMod(), getMaxDefendMod()));
 
@@ -61,5 +61,6 @@ public class Knight extends Fighter{
         }
 
         health = getHealth() - damageTaken;
+        return damageTaken;
     }
 }

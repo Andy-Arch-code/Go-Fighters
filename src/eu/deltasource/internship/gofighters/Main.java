@@ -11,11 +11,11 @@ public class Main {
         DependencyInjector.init(new RngCalculationsRealImpl());
 
         //Testing game with 10 games
-        for (int x = 0; x < 10; x++) {
-            Fighter gosho = new Knight("gosho", 100, 10, 5);
-            Fighter pesho = new Knight("pesho", 100, 10, 5);
+
+            Fighter gosho = new Knight("Gosho", 100, 10, 5);
+            Fighter pesho = new Monk("Pesho", 100, 10, 5);
 
             System.out.println(fighterState.run(gosho, pesho).getName() + " is the winner!");
-        }
+
     }
 }

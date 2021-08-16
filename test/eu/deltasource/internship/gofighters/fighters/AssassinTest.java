@@ -18,20 +18,19 @@ public class AssassinTest {
         DependencyInjector.init(new RngCalculationsTestingImpl());
     }
 
-    /**
-     * Given: Assassin with normal stats.
-     * When: Assassin attacks.
-     * Then: Calculated attack is with its special multiplier.
-     */
     @Test
     public void testIfAssassinAttacksWithSpecialMultiplier() {
 
+        //Given: Assassin with normal stats.
         Fighter gosho = new Assassin("gosho", 100, 10, 5);
 
         RngCalculations rngCalculator = new RngCalculationsTestingImpl();
-        int expectedAnswer = rngCalculator.roundToInt(
-                gosho.getAttackPoints() * gosho.getMinAttackMod() * Assassin.getCritMult());
 
+        //When: Assassin attacks.
+        int expectedAnswer = rngCalculator.roundToInt(
+                gosho.getAttackPoints() * Fighter.getMinAttackMod() * Assassin.getCritMult());
+
+        //Then: Calculated attack is with its special multiplier.
         assertEquals(expectedAnswer, gosho.attack(), "Expected Assassin to attack with special multiplier");
     }
 }

@@ -18,22 +18,20 @@ public class MonkTest {
         DependencyInjector.init(new RngCalculationsTestingImpl());
     }
 
-    /**
-     * Given: Monk with normal stats.
-     * When: Monk defends against damage.
-     * Then: Monk defends all damage.
-     */
     @Test
     public void testIfMonkDefendsAgainstDamage() {
 
+        //Given: Monk with normal stats.
         Fighter gosho = new Monk("gosho", 100, 10, 5);
         int damage = 10;
 
         RngCalculations rngCalculator = new RngCalculationsTestingImpl();
         int expectedAnswer = 100;
 
+        //When: Monk defends against damage.
         gosho.takeDamage(damage);
 
+        //Then: Monk defends all damage.
         assertEquals(expectedAnswer, gosho.getHealth(), "Expected Monk to defend the attack fully");
     }
 }

@@ -18,39 +18,36 @@ public class SpellSwordTest {
         DependencyInjector.init(new RngCalculationsTestingImpl());
     }
 
-    /**
-     * Given: SpellSword with normal stats.
-     * When: SpellSword attacks.
-     * Then: Calculated attack is with its bonus.
-     */
     @Test
     public void testIfSpellSwordAttacksWithSpecialMultiplier() {
 
+        //Given: SpellSword with normal stats.
         Fighter gosho = new SpellSword("gosho", 100, 10, 5);
 
         RngCalculations rngCalculator = new RngCalculationsTestingImpl();
+        //When: SpellSword attacks.
         int expectedAnswer = rngCalculator.roundToInt(
-                gosho.getAttackPoints() * gosho.getMinAttackMod() * SpellSword.getCritMult());
+                gosho.getAttackPoints() * SpellSword.getMinAttackMod() * SpellSword.getCritMult());
 
+        //Then: Calculated attack is with its bonus.
         assertEquals(expectedAnswer, gosho.attack(), "Expected SpellSword to attack with special multiplier");
     }
 
-    /**
-     * Given: SpellSword with normal stats.
-     * When: SpellSword defends against damage.
-     * Then: SpellSword defends all damage.
-     */
+
     @Test
     public void testIfSpellSwordDefendsAgainstDamage() {
 
+        //Given: SpellSword with normal stats.
         Fighter gosho = new SpellSword("gosho", 100, 10, 5);
         int damage = 10;
 
         RngCalculations rngCalculator = new RngCalculationsTestingImpl();
         int expectedAnswer = 100;
 
+        //When: SpellSword defends against damage.
         gosho.takeDamage(damage);
 
+        //Then: SpellSword defends all damage.
         assertEquals(expectedAnswer, gosho.getHealth(), "Expected SpellSword to defend the attack fully");
     }
 }
