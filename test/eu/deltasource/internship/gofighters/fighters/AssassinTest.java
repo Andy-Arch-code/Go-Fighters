@@ -3,11 +3,20 @@ package eu.deltasource.internship.gofighters.fighters;
 import eu.deltasource.internship.gofighters.RngCalculations;
 import eu.deltasource.internship.gofighters.RngCalculationsTestingImpl;
 import eu.deltasource.internship.gofighters.dependencyinjector.DependencyInjector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AssassinTest {
+
+    /**
+     * Initialize dependencies.
+     */
+    @BeforeEach
+    public void init() {
+        DependencyInjector.init(new RngCalculationsTestingImpl());
+    }
 
     /**
      * Given: Assassin with normal stats.
@@ -16,7 +25,6 @@ public class AssassinTest {
      */
     @Test
     public void testIfAssassinAttacksWithSpecialMultiplier() {
-        DependencyInjector.init(new RngCalculationsTestingImpl());
 
         Fighter gosho = new Assassin("gosho", 100, 10, 5);
 

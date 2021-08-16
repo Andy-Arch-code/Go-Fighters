@@ -2,11 +2,20 @@ package eu.deltasource.internship.gofighters;
 
 import eu.deltasource.internship.gofighters.dependencyinjector.DependencyInjector;
 import eu.deltasource.internship.gofighters.fighters.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameEngineTest {
+
+    /**
+     * Initialize dependencies.
+     */
+    @BeforeEach
+    public void init() {
+        DependencyInjector.init(new RngCalculationsTestingImpl());
+    }
 
     /**
      * Given: Game with a Warrior and a SpellSword.
@@ -16,8 +25,6 @@ public class GameEngineTest {
     @Test
     public void testIfTheGameEngineRunsTheGameProperly() {
         GameEngine fighterState = new GameEngine();
-
-        DependencyInjector.init(new RngCalculationsTestingImpl());
 
         Fighter gosho = new Warrior("gosho", 100, 10, 5);
         Fighter pesho = new SpellSword("pesho", 100, 10, 5);

@@ -3,11 +3,20 @@ package eu.deltasource.internship.gofighters.fighters;
 import eu.deltasource.internship.gofighters.RngCalculations;
 import eu.deltasource.internship.gofighters.RngCalculationsTestingImpl;
 import eu.deltasource.internship.gofighters.dependencyinjector.DependencyInjector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class WarriorTest {
+
+    /**
+     * Initialize dependencies.
+     */
+    @BeforeEach
+    public void init() {
+        DependencyInjector.init(new RngCalculationsTestingImpl());
+    }
 
     /**
      * Given: Warrior with normal stats.
@@ -16,7 +25,6 @@ public class WarriorTest {
      */
     @Test
     public void testIfWarriorAttacksWithSpecificDamage() {
-        DependencyInjector.init(new RngCalculationsTestingImpl());
 
         Fighter gosho = new Warrior("gosho", 100, 10, 5);
 
@@ -33,7 +41,6 @@ public class WarriorTest {
      */
     @Test
     public void testIfWarriorTakesSpecificDamage() {
-        DependencyInjector.init(new RngCalculationsTestingImpl());
 
         Fighter gosho = new Warrior("gosho", 100, 10, 5);
         int damage = 10;
@@ -55,7 +62,6 @@ public class WarriorTest {
      */
     @Test
     public void testIfWarriorIsDeadAfterAttackEqualToHealth() {
-        DependencyInjector.init(new RngCalculationsTestingImpl());
 
         Fighter gosho = new Warrior("gosho", 100, 1000000000, 0);
         gosho.takeDamage(100 + (int)(gosho.getArmorPoints() * gosho.getMinDefendMod()));
